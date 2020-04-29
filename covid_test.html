@@ -1,0 +1,103 @@
+<html>
+<head>
+<title>covid_test</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<style>
+	#okayToWork {
+		background-color: lightgreen;
+		width: 50%;
+		height: 50%;
+		font-size: 500%;
+		display: none;
+	}
+	#notOkayToWork {
+		background-color: pink;
+		width: 50%;
+		height: 50%;
+		font-size: 200%;
+		display: none;
+	}
+</style>
+<body>
+<div id="questions">
+As of tonight do you have:<br>
+  <input type="checkbox" id="fever" name="fever">
+  <label for="fever"> Fever (>100oF measured at home) -OR- feeling “feverish” (chills, sweats, body aches)</label><br>
+  <input type="checkbox" id="cough" name="cough">
+  <label for="cough"> New or newly worsening cough</label><br>
+  <input type="checkbox" id="sob" name="sob">
+  <label for="sob"> New Shortness of breath or difficulty breathing</label><br>
+  <input type="checkbox" id="smell" name="smell">
+  <label for="smell"> New loss of taste/smell</label><br>
+  <input type="checkbox" id="chills" name="othersym">
+  <label for="chills"> Chills</label><br>
+  <input type="checkbox" id="shaking" name="othersym">
+  <label for="shaking"> Repeated shaking with chills</label><br>
+  <input type="checkbox" id="muscle" name="othersym">
+  <label for="muscle"> Muscle pain</label><br>
+  <input type="checkbox" id="headache" name="othersym">
+  <label for="headache"> Headache</label><br>
+  <input type="checkbox" id="sore" name="othersym">
+  <label for="sore"> Sore throat</label><br>
+
+
+  <input id="submit" type="submit" value="Submit">
+</div>
+
+<div id = "okayToWork">
+	PASS THROUGH
+	<p id='dt1'></p>
+</div>
+
+<div id="notOkayToWork">
+	proceed to your car, or outside space away from people, and call occupational health  xxxxxxx
+	<p id='dt2'></p>
+</div>
+
+
+  <script>
+  		n =  new Date();
+	y = n.getFullYear();
+	m = n.getMonth() + 1;
+	d = n.getDate();
+	document.getElementById("dt1").innerHTML = m + "/" + d + "/" + y;
+	document.getElementById("dt2").innerHTML = m + "/" + d + "/" + y;
+
+  	$('#submit').click(function() {
+  		document.getElementById("questions").style.display="none";
+		var total=$('input[name="othersym"]:checked').length;
+  		if ($('#fever').is(':checked')) {
+  			document.getElementById("notOkayToWork").style.display="block";
+  		} else if($('#cough').is(':checked')) {
+  			document.getElementById("notOkayToWork").style.display="block";
+  		} else if ($('#sob').is(':checked')) {
+  			document.getElementById("notOkayToWork").style.display="block";
+  		} else if ($('#smell').is(':checked')) {
+  			document.getElementById("notOkayToWork").style.display="block";
+  		} else if ($('#smell').is(':checked') & $('#smell').is(':checked')) {
+  			document.getElementById("notOkayToWork").style.display="block";
+  		} else if (total>=2) {
+  			document.getElementById("notOkayToWork").style.display="block";
+  		} else {
+	  		document.getElementById("okayToWork").style.display="block";	
+  		}
+  	});
+  </script>
+
+<!--
+•	New or newly worsening cough 
+•	New Shortness of breath or difficulty breathing
+•	New loss of taste/smell
+
+Or at least two of these symptoms:
+•	Fever
+•	Chills
+•	Repeated shaking with chills
+•	Muscle pain
+•	Headache
+•	Sore throat
+-->
+
+</body>
+</html>
